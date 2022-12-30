@@ -1,4 +1,4 @@
-from django.shortcuts import render
+# from django.shortcuts import render
 from django.urls import reverse
 from extra_views import (CreateWithInlinesView, InlineFormSetFactory,
                          UpdateWithInlinesView)
@@ -25,7 +25,7 @@ class PlanoCreateView(CreateWithInlinesView):
     fields = ['nome', 'responsavel_plano',
               'indicador_estrategico', 'pilar',
               'unidade_negocio', 'perspectiva',]
-    template_name = 'app_crud/plano_create.html'
+    template_name = 'appplano/plano_create.html'
 
     def get_success_url(self):
         return reverse('plano:planocreate')
@@ -37,7 +37,7 @@ class PlanoUpdateView(UpdateWithInlinesView):
     fields = ['nome', 'responsavel_plano',
               'indicador_estrategico', 'pilar',
               'unidade_negocio', 'perspectiva',]
-    template_name = 'app_crud/plano_create.html'
+    template_name = 'appplano/plano_create.html'
 
     def get_success_url(self):
         return reverse('plano:planocreate')
