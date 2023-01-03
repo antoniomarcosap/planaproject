@@ -1,4 +1,3 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -10,15 +9,41 @@
 
 <body>
     <h3>Criar Plano</h3>
-    <form action="." method="POST">
+    <form id="formplan-container" action="." method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
+            {{ form.as_p }}
         <hr>
         {% for ft in inlines %}
-            {{ ft.as_p }}
+            <div class="iteminline">
+                {{ ft.as_p }}
+                <hr>
+            </div>
         {% endfor %}
         <button id="add-item" type="button">Adicionar Item</button>
-        <button id="save-plano" type="submit" value="Salvar">Salvar</button>
+        <button id="save-plan" type="submit" value="Salvar">Salvar</button>
     </form>
+    <script>
+        let formItem = document.querySelectorAll(".iteminline")
+        let containerPlan = document.querySelector("#formplan-container")
+        let addButton = document.querySelector("#add-item")
+        let totalForms = document.querySelector("#id_item_plano-TOTAL_FORMS")
+ 
+        let formNum = formItem.length-1
+        addButton.addEventListener('click', addItemForm)
+ 
+        function addItemForm(e){
+         e.preventDefault()
+ 
+         let newItemForm = formItem[0].cloneNode(true)
+         let formRegex = RegExp(`form-(\\d){1}-`,'g')
+ 
+         formNum++
+ 
+         newItemForm.innerHTML = newItemForm.innerHTML.replace(formRegex, `form-${formNum}-`)
+         containerPlan.insertBefore(newItemForm, addButton)
+ 
+         totalForms.setAttribute('value', `${formNum+1}`)
+        }
+     </script>
 </body>
 </html>

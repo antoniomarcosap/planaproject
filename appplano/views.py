@@ -9,7 +9,7 @@ from .models import Item_Plano_Acao, Plano_Acao
 class ItemInline(InlineFormSetFactory):
     model = Item_Plano_Acao
     fields = ['nome', 'como', 'quem', 'data_inicio',
-              'data_fim', 'quanto', 'risco_estrategia',
+              'data_fim', 'onde', 'porque', 'quanto', 'risco_estrategia',
               'evidencia', 'arquivo_evidencia', 'status',]
     factory_kwargs = {
         'extra': 1,
