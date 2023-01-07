@@ -14,9 +14,9 @@ urlpatterns = [
     path('adicionarplano/', views.AdicionarPlano,
          name='adicionarplano'),
 
-    path('planupdate/<int:plano_id>/', views.AtualizarPlano,
+    path('planupdate/<int:pk>/', views.AtualizarPlano,
          name='planupdate'),
 
-    path('removerplano/', views.RemoverPlano.as_view(),
-         name='removerplano'),
+    path('removerplano/<int:pk>/', views.RemoverPlano.as_view(),
+         name='removeplan'),
 ]

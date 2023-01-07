@@ -1,8 +1,7 @@
 from django.forms.models import inlineformset_factory
 from django.shortcuts import redirect, render
-from django.urls import reverse
-from django.views import View
-from django.views.generic import DetailView, ListView
+from django.urls import reverse, reverse_lazy
+from django.views.generic import DeleteView, DetailView, ListView
 
 from . import models
 from .forms import Item_Plano_AcaoModelForm, PlanoModelForm
@@ -54,9 +53,9 @@ def AdicionarPlano(request):
             return render(request, 'appplano/plano_create.html', context)
 
 
-def AtualizarPlano(request, plano_id):
+def AtualizarPlano(request, pk):
     if request.method == "GET":
-        planoject = Plano_Acao.objects.filter(id=plano_id).first()
+        planoject = Plano_Acao.objects.filter(id=pk).first()
         if planoject is None:
             return redirect(reverse('plano:planlist'))
         planform = PlanoModelForm(instance=planoject)
@@ -71,7 +70,7 @@ def AtualizarPlano(request, plano_id):
         return render(request, 'appplano/plano_create.html', context)
 
     elif request.method == "POST":
-        planoject = Plano_Acao.objects.filter(id=plano_id).first()
+        planoject = Plano_Acao.objects.filter(id=pk).first()
         if planoject is None:
             return redirect(reverse('plano:planlist'))
         planform = PlanoModelForm(request.POST, instance=planoject)
@@ -92,5 +91,7 @@ def AtualizarPlano(request, plano_id):
             return render(request, 'appplano/plano_create.html', context)
 
 
-class RemoverPlano(View):
-    pass
+class RemoverPlano(DeleteView):
+    queryset = Plano_Acao.objects.all()
+    template_name = 'appplano/plan_confirm_delete.html'
+    success_url = reverse_lazy('plano:planlist')

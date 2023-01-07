@@ -30,8 +30,8 @@
         <div id="empty_itemform" class="hidden">{{ form_item.empty_form.as_p }}</div>
         <button id="add-item" type="button" >Adicionar Item</button>
         <button id="save-plan" type="submit" value="Salvar">Salvar</button>
+        <button type="reset" onclick="location.href='{% url 'plano:planlist' %}'">Cancelar</button>
     </form>
-    <a href="{% url 'plano:planlist' %}"><button>Cancelar</button></a>
 
 <script>
     

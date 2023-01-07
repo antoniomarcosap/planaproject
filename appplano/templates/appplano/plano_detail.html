@@ -45,5 +45,6 @@
         <p>{{ item.status }}</p>
         <p>----------------------------------------------------------------</p>
     {% endfor %}
+    <a href="{% url 'plano:removeplan' plano.id %}"><button>Remover Plano</button></a>
 </body>
 </html>
