@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="{% url 'plano:planlist' %}"><button>Todos os Planos</button></a>
+    <a href="{% url 'plano:planupdate' plandetail.id %}"><button>Editar Plano</button></a>
+    <a href="{% url 'plano:adicionarplano' %}"><button>Adicionar Novo Plano</button></a>
+    <h4>Detalhes do Plano</h4>
+    <h5>Linha de Ação</h5>
+    <p>{{ plandetail.nome }}</p>
+    <h5>Responsável pela Linha de Ação</h5>
+    <p>{{ plandetail.responsavel_plano }}</p>
+    <h5>Indicador Estratégico</h5>
+    <p>{{ plandetail.indicador_estrategico }}</p>
+    <h4>Desdobramentos</h4>
+    {% for item in plandetail.item_plano.all %}
+        <h5>O que?</h5>
+        <p>{{ item.nome }}</p>
+        <h5>Como?</h5>
+        <p>{{ item.como }}</p>
+        <h5>Quem?</h5>
+        <p>{{ item.quem }}</p>
+        <h5>Data de Início</h5>
+        <p>{{ item.data_inicio }}</p>
+        <h5>Data de Finalização</h5>
+        <p>{{ item.data_fim }}</p>
+        <h5>Onde?</h5>
+        <p>{{ item.onde }}</p>
+        <h5>Quanto?</h5>
+        <p>{{ item.quanto }}</p>
+        <h5>Risco à Estratégia</h5>
+        <p>{{ item.risco_estrategia }}</p>
+        <h5>Possui evidência?</h5>
+        <p>{{ item.evidencia }} | {{ item.arquivo_evidencia }}</p>
+        <h5>Data de Criação</h5>
+        <p>{{ item.criacao }}</p>
+        <h5>Última Atualização</h5>
+        <p>{{ item.atualizacao }}</p>
+        <h5>Status</h5>
+        <p>{{ item.status }}</p>
+        <p>----------------------------------------------------------------</p>
+    {% endfor %}
+</body>
+</html>

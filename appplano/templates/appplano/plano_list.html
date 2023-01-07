@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planos de Ação</title>
+</head>
+<body>
+    <a href="{% url 'plano:adicionarplano' %}"><button>Adicionar Novo Plano</button></a>
+    {% for plano in object_list %}
+        <h3>Id</h3>
+        <p>{{ plano.id }}</p>
+        <h3>Linha de Ação</h3>
+        <p>{{ plano.nome }}</p>
+        <h4>Responsável pela Linha de Ação</h4>
+        <p>{{ plano.responsavel_plano }}</p>
+        <h4>Indicador Estratégico</h4>
+        <p>{{ plano.indicador_estrategico }}</p>
+        <h4>Unidade</h4>
+        <p>{{ plano.unidade_negocio }}</p>
+        <h4>Última Atualização</h4>
+        <p>{{ plano.atualizacao }}</p>
+        <a href="{% url 'plano:plandetail' pk=plano.id %}"><button>Ver Plano</button></a>
+
+        <p>----------------------------------------------------------------</p>
+    {% endfor %}
+</body>
+</html>

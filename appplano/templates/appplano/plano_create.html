@@ -1,49 +1,60 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-Br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Criar Plano</title>
+    <title>Adicionar Plano de Ação</title>
 </head>
-
 <body>
-    <h3>Criar Plano</h3>
-    <form id="formplan-container" action="." method="POST">
+    <style>
+        .hidden {
+            display: none
+        }
+    </style>
+
+    <h2>Incluir novo Plano de Ação</h2>
+    <form id="planform" action="." method="POST" class="form" autocomplete="off">
         {% csrf_token %}
-            {{ form.as_p }}
-        <hr>
-        {% for ft in inlines %}
-            <div class="iteminline">
-                {{ ft.as_p }}
-                <hr>
-            </div>
-        {% endfor %}
-        <button id="add-item" type="button">Adicionar Item</button>
+        {{ planform.as_p }}
+        <h3>Itens do Plano de Ação</h3>
+        {{ form_item.management_form }}
+        <div id="iteminline-form-list">
+            {% for item in form_item %}
+                <div class="iteminline-form">
+                    {{ item.as_p }}
+                    <hr>
+                </div>
+            {% endfor %}
+        </div>
+        <div id="empty_itemform" class="hidden">{{ form_item.empty_form.as_p }}</div>
+        <button id="add-item" type="button" >Adicionar Item</button>
         <button id="save-plan" type="submit" value="Salvar">Salvar</button>
     </form>
-    <script>
-        let formItem = document.querySelectorAll(".iteminline")
-        let containerPlan = document.querySelector("#formplan-container")
-        let addButton = document.querySelector("#add-item")
-        let totalForms = document.querySelector("#id_item_plano-TOTAL_FORMS")
- 
-        let formNum = formItem.length-1
-        addButton.addEventListener('click', addItemForm)
- 
-        function addItemForm(e){
-         e.preventDefault()
- 
-         let newItemForm = formItem[0].cloneNode(true)
-         let formRegex = RegExp(`form-(\\d){1}-`,'g')
- 
-         formNum++
- 
-         newItemForm.innerHTML = newItemForm.innerHTML.replace(formRegex, `form-${formNum}-`)
-         containerPlan.insertBefore(newItemForm, addButton)
- 
-         totalForms.setAttribute('value', `${formNum+1}`)
+    <a href="{% url 'plano:planlist' %}"><button>Cancelar</button></a>
+
+<script>
+    
+    const addItemBtn = document.getElementById('add-item')
+    const totalNewItemForms = document.getElementById('id_item_plano-TOTAL_FORMS')
+    addItemBtn.addEventListener('click', add_new_itemForm)
+
+    function add_new_itemForm(event){
+        if (event){
+            event.preventDefault()
         }
-     </script>
+        const currentItemForms = document.getElementsByClassName('iteminline-form')
+        const currentItemFormCount = currentItemForms.length // + 1
+        const itemFormCopyTarget = document.getElementById('iteminline-form-list')
+        const copyEmptyItemFormEl = document.getElementById('empty_itemform').cloneNode(true)
+        copyEmptyItemFormEl.setAttribute('class', 'iteminline-form')
+        copyEmptyItemFormEl.setAttribute('id', `form-${currentItemFormCount}`)
+        const regex = new RegExp('__prefix__', 'g')
+        copyEmptyItemFormEl.innerHTML = copyEmptyItemFormEl.innerHTML.replace(regex, currentItemFormCount)
+        totalNewItemForms.setAttribute('value', currentItemFormCount + 1)
+        itemFormCopyTarget.append(copyEmptyItemFormEl)
+    }
+</script>
+
 </body>
 </html>
