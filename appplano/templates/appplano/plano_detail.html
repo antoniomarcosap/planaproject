@@ -8,17 +8,17 @@
 </head>
 <body>
     <a href="{% url 'plano:planlist' %}"><button>Todos os Planos</button></a>
-    <a href="{% url 'plano:planupdate' plandetail.id %}"><button>Editar Plano</button></a>
+    <a href="{% url 'plano:planupdate' plano.id %}"><button>Editar Plano</button></a>
     <a href="{% url 'plano:adicionarplano' %}"><button>Adicionar Novo Plano</button></a>
     <h4>Detalhes do Plano</h4>
     <h5>Linha de Ação</h5>
-    <p>{{ plandetail.nome }}</p>
+    <p>{{ plano.nome }}</p>
     <h5>Responsável pela Linha de Ação</h5>
-    <p>{{ plandetail.responsavel_plano }}</p>
+    <p>{{ plano.responsavel_plano }}</p>
     <h5>Indicador Estratégico</h5>
-    <p>{{ plandetail.indicador_estrategico }}</p>
+    <p>{{ plano.indicador_estrategico }}</p>
     <h4>Desdobramentos</h4>
-    {% for item in plandetail.item_plano.all %}
+    {% for item in plano.item_plano.all %}
         <h5>O que?</h5>
         <p>{{ item.nome }}</p>
         <h5>Como?</h5>

@@ -13,14 +13,14 @@ class ListaPlanos(ListView):
     model = models.Plano_Acao
     queryset = Plano_Acao.objects.all()
     template_name = 'appplano/plano_list.html'
-    context_object_name = 'planlist'
+    context_object_name = 'plano'
 
 
 class DetalhePlano(DetailView):
     model = models.Plano_Acao
     queryset = Plano_Acao.objects.all()
     template_name = 'appplano/plano_detail.html'
-    context_object_name = 'plandetail'
+    context_object_name = 'plano'
 
 
 def AdicionarPlano(request):
