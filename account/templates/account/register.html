@@ -1,0 +1,20 @@
+<div class="main-content container">
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %} 
+    <form method="POST">
+        {% csrf_token %}
+        <h4>Criar conta</h4>
+        {% for field in user_form %}
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            <p>{{ field }}</p>
+            {% if field.help_text %}
+                <p class class="help-text">{{ field.help_text }}</p>
+            {% endif %}
+            {{ field.errors }}
+        {% endfor %}
+        <button type="submit">Criar minha conta</button>
+    </form>
+</div>
