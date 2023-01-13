@@ -1,14 +1,12 @@
 <div class="main-content container">
     <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <h4>Editar conta</h4>
             <p>{{ user_form }}</p>
             <p>{{ profile_form }}</p>
+            {% csrf_token %}
             {% if field.help_text %}
                 <p class class="help-text">{{ field.help_text }}</p>
             {% endif %}
             {{ field.errors }}
-        {% endfor %}
         <button type="submit">Salvar</button>
     </form>
 </div>

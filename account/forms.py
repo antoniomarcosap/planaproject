@@ -56,12 +56,12 @@ class RegisterForm(forms.ModelForm):
             }),
         }
 
-        def clean_password2(self):
-            cd = self.cleaned_data
-            if cd['password'] != cd['password2']:
-                raise forms.ValidationError(
-                    'As senhas digitadas não são iguais.')
-            return cd['password2']
+    def clean_password2(self):
+        cd = self.cleaned_data
+        if cd['password'] != cd['password2']:
+            raise forms.ValidationError(
+                'As senhas digitadas não são iguais.')
+        return cd['password2']
 
 
 class UserEditForm(forms.ModelForm):

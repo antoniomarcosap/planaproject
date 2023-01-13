@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 from decouple import Csv, config
@@ -116,7 +117,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = [(BASE_DIR / 'media/',)]
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -124,5 +125,5 @@ MEDIA_ROOT = [(BASE_DIR / 'media/',)]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-LOGIN_URL = 'account:login'
-LOGOUT_URL = 'account:logout'
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = 'account:home'
