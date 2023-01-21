@@ -6,10 +6,8 @@ from .models import Profile
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField(label='Usuário',)
-    password = forms.CharField(label='Senha', widget=forms.PasswordInput(attrs={
-        'placeholder': 'Digite sua senha',
-    }))
+    username = forms.CharField()
+    password = forms.CharField()
 
 
 class RegisterForm(forms.ModelForm):

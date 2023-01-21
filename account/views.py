@@ -15,7 +15,7 @@ class HomeView(TemplateView):
 
 @login_required
 def DashboardView(request):
-    return render(request, {'section': 'dashboard'})
+    return render(request, 'account/dashboard.html')
 
 
 def LoginView(request):

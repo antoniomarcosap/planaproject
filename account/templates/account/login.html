@@ -1,13 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    <title>Login</title>
+</head>
+<body>
+
 <div class="login">
     {% if messages %}
     {% for message in messages %}
         <p>{{ message }}</p>
     {% endfor %}
-{% endif %} 
-    <h4>Entrar</h4>
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Entrar</button>
-    </form>
+{% endif %}
+<div class="box-login">
+    <div class="box-form">
+        <a href="#"><img src="{% static '/img/logo.png' %}" alt=""></a>
+        <div class="login-forms">
+            <div class="box-input">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <input type="text" name="username" placeholder="Email ou nome de usuário" autofocus>
+                    <input type="password" name="password" placeholder="Sua senha" autofocus>
+                    <input type="submit" value="Entrar">
+                </form>
+            </div>
+        </div>
+        <p>Esqueceu a senha? <a href="#">Clique aqui.</a></p>
+    </div>
 </div>
+    
+</body>
+</html>
