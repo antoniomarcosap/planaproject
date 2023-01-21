@@ -3,14 +3,14 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.urls import reverse_lazy
+from django.views.generic import TemplateView
 
 from .forms import LoginForm, ProfileEditForm, RegisterForm, UserEditForm
 from .models import Profile
 
 
-def HomeView(request):
-    return render(request, 'account/home.html')
+class HomeView(TemplateView):
+    template_name = 'account/home.html'
 
 
 @login_required
@@ -51,6 +51,8 @@ def RegisterView(request):
             )
             new_user.save()
             Profile.objects.create(user=new_user)
+            messages.success(
+                request, 'Seu pedido de cadastro foi enviado. Aguarde o email de confirmação')
             return render(request, 'account/register_done.html',
                           {'new_user': new_user})
     else:
@@ -71,6 +73,10 @@ def UserEditView(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
+            messages.success(request, 'Seu perfil foi atualizado.')
+        else:
+            messages.error(
+                request, 'Ops! :| Não foi possível atualizar o seu perfil')
     else:
         user_form = UserEditForm(instance=request.user)
         profile_form = ProfileEditForm(
@@ -79,3 +85,8 @@ def UserEditView(request):
                   'account/profile_edit.html',
                   {'user_form': user_form,
                    'profile_form': profile_form})
+
+
+@login_required
+def PasswordChangeView(request):
+    return render(request, 'account/password_change.html')

@@ -1,12 +1,15 @@
 from django import forms
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 
 from .models import Profile
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField()
-    password = forms.CharField(widget=forms.PasswordInput)
+    username = forms.CharField(label='Usuário',)
+    password = forms.CharField(label='Senha', widget=forms.PasswordInput(attrs={
+        'placeholder': 'Digite sua senha',
+    }))
 
 
 class RegisterForm(forms.ModelForm):
@@ -56,6 +59,24 @@ class RegisterForm(forms.ModelForm):
             }),
         }
 
+    def clean_username(self):
+        username = self.cleaned_data.get('username', '')
+        exists = User.objects.filter(username=username).exists()
+        if exists:
+            raise ValidationError(
+                'Já existe um cadastro com este usuário no sistema',
+                code='invalid',)
+        return username
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email', '')
+        exists = User.objects.filter(email=email).exists()
+        if exists:
+            raise ValidationError(
+                'Já existe uma conta com este email no sistema',
+                code='invalid',)
+        return email
+
     def clean_password2(self):
         cd = self.cleaned_data
         if cd['password'] != cd['password2']:
@@ -68,11 +89,13 @@ class UserEditForm(forms.ModelForm):
     class Meta:
         model = User
         fields = (
+            'username',
             'first_name',
             'email',
         )
 
         labels = {
+            'username': 'Nome de usuário',
             'first_name': 'Nome Completo',
             'email': 'Email',
         }

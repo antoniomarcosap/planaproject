@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms.models import inlineformset_factory
 from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
@@ -8,20 +10,23 @@ from .forms import Item_Plano_AcaoModelForm, PlanoModelForm
 from .models import Item_Plano_Acao, Plano_Acao
 
 
-class ListaPlanos(ListView):
+class ListaPlanos(LoginRequiredMixin, ListView):
     model = models.Plano_Acao
-    queryset = Plano_Acao.objects.all()
     template_name = 'appplano/plano_list.html'
     context_object_name = 'plano'
 
+    def get_queryset(self):
+        return Plano_Acao.objects.filter(responsavel_plano=self.request.user)
 
-class DetalhePlano(DetailView):
+
+class DetalhePlano(LoginRequiredMixin, DetailView):
     model = models.Plano_Acao
     queryset = Plano_Acao.objects.all()
     template_name = 'appplano/plano_detail.html'
     context_object_name = 'plano'
 
 
+@ login_required
 def AdicionarPlano(request):
     if request.method == "GET":
         planform = PlanoModelForm()
@@ -53,6 +58,7 @@ def AdicionarPlano(request):
             return render(request, 'appplano/plano_create.html', context)
 
 
+@login_required
 def AtualizarPlano(request, pk):
     if request.method == "GET":
         planoject = Plano_Acao.objects.filter(id=pk).first()
@@ -91,7 +97,7 @@ def AtualizarPlano(request, pk):
             return render(request, 'appplano/plano_create.html', context)
 
 
-class RemoverPlano(DeleteView):
+class RemoverPlano(LoginRequiredMixin, DeleteView):
     queryset = Plano_Acao.objects.all()
     template_name = 'appplano/plan_confirm_delete.html'
     success_url = reverse_lazy('plano:planlist')
