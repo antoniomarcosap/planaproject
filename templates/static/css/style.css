@@ -22,6 +22,7 @@
     left: -280px;
     transition: all .2s linear;
     background-color: white;
+    z-index: 2;
 }
 
 .box-menu .sidebar-perfil{
@@ -176,7 +177,7 @@ header {
     align-items: center;
     width: 100%;
     height: 200vh;
-    background-color: #ececec;
+    background-color: #f3f3f3;
 }
 
 .content-site .dashboard-container-p1{
@@ -263,3 +264,85 @@ form [type="submit"]{
     text-decoration: underline;
 }
 /* END BOX-LOGIN */
+
+
+/* START BOX-REGISTER */
+
+.box-register{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-register .box-register-form{
+    height: 500px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+}
+
+.box-register .box-register-form a img{
+    height: 25px;
+    margin-top: 30px;
+}
+
+.box-register-form form{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+.box-register-form input{
+    margin-top: 15px;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    height: 40px;
+    outline: none;
+    padding-left: 10px;
+    font-size: 16px;
+}
+
+.box-register-form input::placeholder{
+    font-size: 16px;
+    color: rgb(112, 112, 112);
+}
+
+.box-register-form form [type="submit"]{
+    border: none;
+    display: block;
+    background-color: rgb(102, 128, 163);
+    font-size: 20px;
+    color: white;
+}
+
+.box-register-form p{
+    font-size: 14px;
+    color: rgb(112, 112, 112);
+    margin-bottom: 30px;
+}
+
+/* END BOX-REGISTER */
+
+
+
+/* START CONTENT-LISTPLAN */
+
+.content-listplan{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background-color: #f3f3f3;
+}
+
+.content-listplan .box-listplan{
+    
+}

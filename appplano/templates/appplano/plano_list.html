@@ -1,29 +1,78 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planos de Ação</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    <title>Dashboard</title>
 </head>
-<body>
-    <a href="{% url 'plano:adicionarplano' %}"><button>Adicionar Novo Plano</button></a>
-    {% for plano in object_list %}
-        <h3>Id</h3>
-        <p>{{ plano.id }}</p>
-        <h3>Linha de Ação</h3>
-        <p>{{ plano.nome }}</p>
-        <h4>Responsável pela Linha de Ação</h4>
-        <p>{{ plano.responsavel_plano }}</p>
-        <h4>Indicador Estratégico</h4>
-        <p>{{ plano.indicador_estrategico }}</p>
-        <h4>Unidade</h4>
-        <p>{{ plano.unidade_negocio }}</p>
-        <h4>Última Atualização</h4>
-        <p>{{ plano.atualizacao }}</p>
-        <a href="{% url 'plano:plandetail' pk=plano.id %}"><button>Ver Plano</button></a>
 
-        <p>----------------------------------------------------------------</p>
-    {% endfor %}
+<body>
+<header>
+    <div class="head-site">
+        <div class="box-menu">
+            <input type="checkbox" id="check">
+            <div class="menu-icon">
+                <label for="check">
+                    <i class="fas fa-bars"></i>
+                </label>
+            </div>
+            <div class="sidebar-menu">
+                <div class="sidebar-perfil">
+                    <i class="fas fa-user-circle"></i>
+                    <a href="#">Alterar perfil</a>
+                    <a href="{% url 'account:editprofile' %}">Editar Perfil</a>
+                </div>
+                <div class="btn-close">
+                    <label for="check">
+                        <i class="fas fa-arrow-left"></i>
+                    </label>
+                </div>
+                <nav class="menu">
+                    <ul>
+                        <li><a href="{% url 'account:dashboard' %}">Dashboard</a></li>
+                        <li><a href="{% url 'plano:planlist' %}">Planos de Ações</a></li>
+                        <li><a href="#">Mensagem</a></li>
+                        <li><a href="#">Configurações</a></li>
+                        <li><a href="#">Ajuda</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="logo">
+            <a href="{% url 'account:dashboard' %}"><img src="{% static '/img/logo.png' %}" alt=""></a>
+        </div>
+        <div class="logout-icon">
+            <a href="{% url 'account:logout' %}"><i class="fas fa-sign-out-alt"></i></a>
+        </div>
+    </div>
+</header>
+<div class="content-listplan">
+    <div class="box-listplan">
+        <a href="{% url 'plano:adicionarplano' %}"><button>Adicionar Novo Plano</button></a>
+        <a href="{% url 'account:dashboard' %}">Voltar ao meu dashboard</a>
+        {% for plano in object_list %}
+            <h3>Linha de Ação</h3>
+            <p>{{ plano.nome }}</p>
+            <h4>Responsável pela Linha de Ação</h4>
+            <p>{{ plano.responsavel_plano }}</p>
+            <h4>Indicador Estratégico</h4>
+            <p>{{ plano.indicador_estrategico }}</p>
+            <h4>Unidade</h4>
+            <p>{{ plano.unidade_negocio }}</p>
+            <h4>Última Atualização</h4>
+            <p>{{ plano.atualizacao }}</p>
+            <a href="{% url 'plano:plandetail' pk=plano.id %}"><button>Ver Plano</button></a>
+
+            <p>----------------------------------------------------------------</p>
+        {% endfor %}
+    </div>
+</div>
 </body>
 </html>
