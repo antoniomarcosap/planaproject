@@ -26,7 +26,6 @@
             <div class="sidebar-menu">
                 <div class="sidebar-perfil">
                     <i class="fas fa-user-circle"></i>
-                    <a href="#">Alterar perfil</a>
                     <a href="{% url 'account:editprofile' %}">Editar Perfil</a>
                 </div>
                 <div class="btn-close">
@@ -46,7 +45,7 @@
             </div>
         </div>
         <div class="logo">
-            <a href="{% url 'account:dashboard' %}"><img src="{% static '/img/logo.png' %}" alt=""></a>
+            <a href="{% url 'account:dashboard' %}"><img src="{% static '/img/logo-white.png' %}" alt=""></a>
         </div>
         <div class="logout-icon">
             <a href="{% url 'account:logout' %}"><i class="fas fa-sign-out-alt"></i></a>
@@ -55,23 +54,20 @@
 </header>
 <div class="content-listplan">
     <div class="box-listplan">
-        <a href="{% url 'plano:adicionarplano' %}"><button>Adicionar Novo Plano</button></a>
-        <a href="{% url 'account:dashboard' %}">Voltar ao meu dashboard</a>
-        {% for plano in object_list %}
-            <h3>Linha de Ação</h3>
-            <p>{{ plano.nome }}</p>
-            <h4>Responsável pela Linha de Ação</h4>
-            <p>{{ plano.responsavel_plano }}</p>
-            <h4>Indicador Estratégico</h4>
-            <p>{{ plano.indicador_estrategico }}</p>
-            <h4>Unidade</h4>
-            <p>{{ plano.unidade_negocio }}</p>
-            <h4>Última Atualização</h4>
-            <p>{{ plano.atualizacao }}</p>
-            <a href="{% url 'plano:plandetail' pk=plano.id %}"><button>Ver Plano</button></a>
-
-            <p>----------------------------------------------------------------</p>
-        {% endfor %}
+        <div class="line-tools">
+            <a href="{% url 'plano:adicionarplano' %}"><i class="fas fa-plus"></i>Novo Plano</a>
+        </div>
+        <p class="all-plan-title">Resumo dos Planos</p>
+        <div class="box-cardlist">
+            {% for plano in object_list %}
+                <div class="card-plan">
+                    <p class="line-title">{{ plano.nome }}</p>
+                    <p>Responsável: {{ plano.responsavel_plano }}</p>
+                    <p>Indicador: {{ plano.indicador_estrategico }}</p>
+                    <a href="{% url 'plano:plandetail' pk=plano.id %}">Detalhes</a>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 </div>
 </body>

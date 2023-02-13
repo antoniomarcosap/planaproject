@@ -49,6 +49,7 @@ def RegisterView(request):
             new_user.set_password(
                 user_form.cleaned_data['password']
             )
+            new_user.is_active = False
             new_user.save()
             Profile.objects.create(user=new_user)
             messages.success(
