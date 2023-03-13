@@ -16,7 +16,7 @@ class ListaPlanos(LoginRequiredMixin, ListView):
     context_object_name = 'plano'
 
     def get_queryset(self):
-        return Plano_Acao.objects.filter(responsavel_plano=self.request.user)
+        return Plano_Acao.objects.filter(responsavel_plano=self.request.user).order_by('-criacao')
 
 
 class DetalhePlano(LoginRequiredMixin, DetailView):

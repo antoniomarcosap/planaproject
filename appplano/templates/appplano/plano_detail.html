@@ -1,50 +1,159 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>Detalhes do Plano</title>
 </head>
+
 <body>
-    <a href="{% url 'plano:planlist' %}"><button>Todos os Planos</button></a>
-    <a href="{% url 'plano:planupdate' plano.id %}"><button>Editar Plano</button></a>
-    <a href="{% url 'plano:adicionarplano' %}"><button>Adicionar Novo Plano</button></a>
-    <h4>Detalhes do Plano</h4>
-    <h5>Linha de Ação</h5>
-    <p>{{ plano.nome }}</p>
-    <h5>Responsável pela Linha de Ação</h5>
-    <p>{{ plano.responsavel_plano }}</p>
-    <h5>Indicador Estratégico</h5>
-    <p>{{ plano.indicador_estrategico }}</p>
-    <h4>Desdobramentos</h4>
-    {% for item in plano.item_plano.all %}
-        <h5>O que?</h5>
-        <p>{{ item.nome }}</p>
-        <h5>Como?</h5>
-        <p>{{ item.como }}</p>
-        <h5>Quem?</h5>
-        <p>{{ item.quem }}</p>
-        <h5>Data de Início</h5>
-        <p>{{ item.data_inicio }}</p>
-        <h5>Data de Finalização</h5>
-        <p>{{ item.data_fim }}</p>
-        <h5>Onde?</h5>
-        <p>{{ item.onde }}</p>
-        <h5>Quanto?</h5>
-        <p>{{ item.quanto }}</p>
-        <h5>Risco à Estratégia</h5>
-        <p>{{ item.risco_estrategia }}</p>
-        <h5>Possui evidência?</h5>
-        <p>{{ item.evidencia }} | {{ item.arquivo_evidencia }}</p>
-        <h5>Data de Criação</h5>
-        <p>{{ item.criacao }}</p>
-        <h5>Última Atualização</h5>
-        <p>{{ item.atualizacao }}</p>
-        <h5>Status</h5>
-        <p>{{ item.status }}</p>
-        <p>----------------------------------------------------------------</p>
-    {% endfor %}
-    <a href="{% url 'plano:removeplan' plano.id %}"><button>Remover Plano</button></a>
+<header class="main-header">
+    <div class="box-menu">
+        <input type="checkbox" id="check">
+        <div class="sidebar-menu">
+            <div class="sidebar-perfil">
+                <i class="fas fa-user-circle"></i>
+                <a href="{% url 'account:editprofile' %}">Editar Perfil</a>
+            </div>
+            <div class="btn-close">
+                <label for="check">
+                    <i class="fas fa-arrow-left"></i>
+                </label>
+            </div>
+            <nav class="menu">
+                <ul>
+                    <li><a href="{% url 'account:dashboard' %}">Dashboard</a></li>
+                    <li><a href="{% url 'plano:planlist' %}">Planos de Ações</a></li>
+                    <li><a href="#">Mensagem</a></li>
+                    <li><a href="#">Configurações</a></li>
+                    <li><a href="#">Ajuda</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="head-site">
+        <div class="menu-icon">
+            <label for="check">
+                <i class="fas fa-bars"></i>
+            </label>
+        </div>
+        <div class="logo">
+            <a href="{% url 'account:dashboard' %}"><img src="{% static '/img/logo-white.png' %}" alt=""></a>
+        </div>
+        <div class="logout-icon">
+            <a href="{% url 'account:logout' %}"><i class="fas fa-sign-out-alt"></i></a>
+        </div>
+    </div>
+</header>
+<div class="content-detail-page">
+    <div class="line-tools">
+        <a href="{% url 'plano:planlist' %}"><button>Todos os Planos</button></a>
+        <a href="{% url 'plano:adicionarplano' %}"><button>Adicionar Novo Plano</button></a>
+    </div>
+    
+    <div class="all-plan-title">
+        <i class="fa fa-folder-open"></i>
+        Detalhes do Plano
+    </div>
+
+    <div class="content-detail-box">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        <i class="fa fa-layer-group"></i>Linha de Ação
+                        <a href="{% url 'plano:planupdate' plano.id %}">Editar</a>
+                        <a href="{% url 'plano:removeplan' plano.id %}">Remover</a>
+                    </th>
+                    <th scope="col"><i class="fa fa-chart-simple"></i>Indicador Estratégico</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ plano.nome }}</td>
+                    <td>{{ plano.indicador_estrategico }}</td>
+                </tr>
+            </tbody>
+        
+            <thead>
+                <tr>
+                    <th scope="col"><i class="fa fa-user"></i>Responsável pela Linha de Ação</th>
+                    <th scope="col"><i class="fa fa-building-flag"></i>Unidade Operacional</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ plano.responsavel_plano }}</td>
+                    <td>{{ plano.unidade_negocio }}</td>
+                </tr>
+            </tbody>
+
+            <thead>
+                <tr>
+                    <th scope="col"><i class="fa fa-user"></i>Perspectiva</th>
+                    <th scope="col"><i class="fa fa-building-flag"></i>Pilar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ plano.perspectiva }}</td>
+                    <td>{{ plano.pilar }}</td>
+                </tr>
+            </tbody>
+
+        </table>
+        <h5><i class="fa fa-diagram-next"></i>Desdobramentos</h5>
+        <table class="table table-hover table-striped table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">O que?</td>
+                    <th scope="col">Como?</td>
+                    <th scope="col">Quem?</td>
+                    <th scope="col">Data de início</td>
+                    <th scope="col">Data de Finalização</td>
+                    <th scope="col">Onde?</td>
+                    <th scope="col">Quanto?</td>
+                    <th scope="col">Risco à estratégia</td>
+                    <th scope="col">Evidência?</td>
+                    <th scope="col">Anexo</td>
+                    <th scope="col">Status</td>
+                </tr>
+            </thead>
+                
+                <tbody>
+                    {% for item in plano.item_plano.all %}
+                        <tr>
+                            <td>{{ item.nome }}</td>
+                            <td>{{ item.como }}</td>
+                            <td>{{ item.quem }}</td>
+                            <td>{{ item.data_inicio }}</td>
+                            <td>{{ item.data_fim }}</td>
+                            <td>{{ item.onde }}</td>
+                            <td>{{ item.quanto }}</td>
+                            <td>{{ item.risco_estrategia }}</td>
+                            <td>{{ item.evidencia }}</td>
+                            <td>{{ item.arquivo_evidencia }}</td>
+                            <td>{{ item.status }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>   
+            </table>
+    </div>
+</div>
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 </html>

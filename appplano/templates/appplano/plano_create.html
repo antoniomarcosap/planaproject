@@ -1,37 +1,108 @@
+{% load crispy_forms_tags %}
+{% load static %}
 <!DOCTYPE html>
-<html lang="pt-Br">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adicionar Plano de Ação</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>Dashboard</title>
 </head>
-<body>
-    <style>
-        .hidden {
-            display: none
-        }
-    </style>
 
-    <h2>Incluir novo Plano de Ação</h2>
-    <form id="planform" action="." method="POST" class="form" autocomplete="off">
-        {% csrf_token %}
-        {{ planform.as_p }}
-        <h3>Itens do Plano de Ação</h3>
-        {{ form_item.management_form }}
-        <div id="iteminline-form-list">
-            {% for item in form_item %}
-                <div class="iteminline-form">
-                    {{ item.as_p }}
-                    <hr>
-                </div>
-            {% endfor %}
+<body>
+<header class="main-header">
+    <div class="box-menu">
+        <input type="checkbox" id="check">
+        <div class="sidebar-menu">
+            <div class="sidebar-perfil">
+                <i class="fas fa-user-circle"></i>
+                <a href="{% url 'account:editprofile' %}">Editar Perfil</a>
+            </div>
+            <div class="btn-close">
+                <label for="check">
+                    <i class="fas fa-arrow-left"></i>
+                </label>
+            </div>
+            <nav class="menu">
+                <ul>
+                    <li><a href="{% url 'account:dashboard' %}">Dashboard</a></li>
+                    <li><a href="{% url 'plano:planlist' %}">Planos de Ações</a></li>
+                    <li><a href="#">Mensagem</a></li>
+                    <li><a href="#">Configurações</a></li>
+                    <li><a href="#">Ajuda</a></li>
+                </ul>
+            </nav>
         </div>
-        <div id="empty_itemform" class="hidden">{{ form_item.empty_form.as_p }}</div>
-        <button id="add-item" type="button" >Adicionar Item</button>
-        <button id="save-plan" type="submit" value="Salvar">Salvar</button>
-        <button type="reset" onclick="location.href='{% url 'plano:planlist' %}'">Cancelar</button>
-    </form>
+    </div>
+    <div class="head-site">
+        <div class="menu-icon">
+            <label for="check">
+                <i class="fas fa-bars"></i>
+            </label>
+        </div>
+        <div class="logo">
+            <a href="{% url 'account:dashboard' %}"><img src="{% static '/img/logo-white.png' %}" alt=""></a>
+        </div>
+        <div class="logout-icon">
+            <a href="{% url 'account:logout' %}"><i class="fas fa-sign-out-alt"></i></a>
+        </div>
+    </div>
+</header>
+
+<div class="createplan-content">
+    <div class="createplan-content-form">
+
+        <h2>Incluir novo Plano de Ação</h2>
+        <form id="planform" action="." method="POST" class="form" autocomplete="off">
+            {% csrf_token %}
+            <table class="table table-hover table-striped table-bordered">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Linha de Ação</td>
+                        <th scope="col">Responsável</td>
+                        <th scope="col">Indicador</td>
+                        <th scope="col">Unidade</td>
+                        <th scope="col">Pilar</td>
+                        <th scope="col">Perspectiva</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ planform.nome }}</td>
+                        <td>{{ planform.responsavel_plano }}</td>
+                        <td>{{ planform.indicador_estrategico }}</td>
+                        <td>{{ planform.unidade_negocio }}</td>
+                        <td>{{ planform.pilar }}</td>
+                        <td>{{ planform.perspectiva }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h4>Desdobramentos</h4>
+            {{ form_item.management_form }}
+            <div id="iteminline-form-list">
+                {% for item in form_item %}
+                    <div class="iteminline-form">
+                        {{ item }}
+                    </div>
+                {% endfor %}
+            </div>
+            <div id="empty_itemform" class="hidden">{{ form_item.empty_form }}</div>
+            <button id="add-item" type="button" class="btn btn-primary">Adicionar Item</button>
+            <button id="save-plan" type="submit" class="btn btn-success">Salvar</button>
+            <button type="button" class="btn btn-warning" onclick="location.href='{% url 'plano:planlist' %}'">Cancelar</button>
+        </form>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 <script>
     

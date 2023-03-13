@@ -34,7 +34,7 @@ def LoginView(request):
                     return HttpResponse('Conta Inativa')
             else:
                 messages.info(
-                    request, 'Login Inválido. Você ainda tem duas tentativas')
+                    request, 'Usuário e/ou senha inválidos.')
                 return render(request, 'account/login.html', {'form': form})
     else:
         form = LoginForm()

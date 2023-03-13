@@ -16,4 +16,4 @@ class Item_Plano_AcaoModelForm(forms.ModelForm):
         fields = ['nome', 'como', 'quem',
                   'data_inicio', 'data_fim', 'onde',
                   'porque', 'quanto', 'risco_estrategia',
-                  'evidencia', 'status', ]
+                  'evidencia', 'arquivo_evidencia', 'status', ]

@@ -10,17 +10,20 @@
 </head>
 <body>
 
-<div class="login">
-    {% if messages %}
-    {% for message in messages %}
-        <p>{{ message }}</p>
-    {% endfor %}
-{% endif %}
-<div class="box-login">
-    <div class="box-form">
-        <a href="#"><img src="{% static '/img/logo.png' %}" alt=""></a>
-        <div class="login-forms">
-            <div class="box-input">
+    <div class="wrapper">
+        <div class="login-messages">
+            {% if messages %}
+                {% for message in messages %}
+                <h4>{{ message }}</h4>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="login-content">
+            <div class="login-logo">
+                <a href="#"><img src="{% static '/img/logo-white.png' %}" alt=""></a>
+            </div>
+            <div class="login-form">
                 <form action="" method="POST">
                     {% csrf_token %}
                     <input type="text" name="username" placeholder="Email ou nome de usuário" autofocus>
@@ -28,10 +31,11 @@
                     <button type="submit">Entrar</button>
                 </form>
             </div>
+            <div class="login-forget-pass">
+                <p>Esqueceu a senha? <a href="#"> Clique aqui.</a></p>
+            </div>
         </div>
-        <p>Esqueceu a senha? <a href="#">Clique aqui.</a></p>
     </div>
-</div>
     
 </body>
 </html>

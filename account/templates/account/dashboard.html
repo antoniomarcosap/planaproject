@@ -10,43 +10,43 @@
         integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <title>Dashboard</title>
 </head>
 
 <body>
-<header>
-    <div class="head-site">
-        <div class="box-menu">
-            <input type="checkbox" id="check">
-            <div class="menu-icon">
+<header class="main-header">
+    <div class="box-menu">
+        <input type="checkbox" id="check">
+        <div class="sidebar-menu">
+            <div class="sidebar-perfil">
+                <i class="fas fa-user-circle"></i>
+                <a href="{% url 'account:editprofile' %}">Editar Perfil</a>
+            </div>
+            <div class="btn-close">
                 <label for="check">
-                    <i class="fas fa-bars"></i>
+                    <i class="fas fa-arrow-left"></i>
                 </label>
             </div>
-            <div class="sidebar-menu">
-                <div class="sidebar-perfil">
-                    <i class="fas fa-user-circle"></i>
-                    <a href="#">Alterar perfil</a>
-                    <a href="{% url 'account:editprofile' %}">Editar Perfil</a>
-                </div>
-                <div class="btn-close">
-                    <label for="check">
-                        <i class="fas fa-arrow-left"></i>
-                    </label>
-                </div>
-                <nav class="menu">
-                    <ul>
-                        <li><a href="{% url 'account:dashboard' %}">Dashboard</a></li>
-                        <li><a href="{% url 'plano:planlist' %}">Planos de Ações</a></li>
-                        <li><a href="#">Mensagem</a></li>
-                        <li><a href="#">Configurações</a></li>
-                        <li><a href="#">Ajuda</a></li>
-                    </ul>
-                </nav>
-            </div>
+            <nav class="menu">
+                <ul>
+                    <li><a href="{% url 'account:dashboard' %}">Dashboard</a></li>
+                    <li><a href="{% url 'plano:planlist' %}">Planos de Ações</a></li>
+                    <li><a href="#">Mensagem</a></li>
+                    <li><a href="#">Configurações</a></li>
+                    <li><a href="#">Ajuda</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="head-site">
+        <div class="menu-icon">
+            <label for="check">
+                <i class="fas fa-bars"></i>
+            </label>
         </div>
         <div class="logo">
-            <a href="{% url 'account:dashboard' %}"><img src="{% static '/img/logo.png' %}" alt=""></a>
+            <a href="{% url 'account:dashboard' %}"><img src="{% static '/img/logo-white.png' %}" alt=""></a>
         </div>
         <div class="logout-icon">
             <a href="{% url 'account:logout' %}"><i class="fas fa-sign-out-alt"></i></a>

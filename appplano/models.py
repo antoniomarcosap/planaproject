@@ -97,7 +97,7 @@ class Plano_Acao(models.Model):
     )
 
     nome = models.CharField(
-        max_length=255,
+        max_length=150,
         db_index=True,
         default='',
         verbose_name='Linha de Ação'
@@ -163,7 +163,7 @@ class Item_Plano_Acao(models.Model):
     )
 
     nome = models.CharField(
-        max_length=140,
+        max_length=150,
         db_index=True,
         verbose_name='O que?',
     )
@@ -241,7 +241,7 @@ class Item_Plano_Acao(models.Model):
         verbose_name_plural = 'Itens do Plano'
 
     def __str__(self):
-        return self.nome or self.plano_acao.nome
+        return self.nome
 
 
 class Ponto_Critico(models.Model):

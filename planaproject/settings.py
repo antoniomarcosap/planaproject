@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'extra_views',
     'appplano',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -132,3 +133,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGOUT_URL = 'logout'
 LOGOUT_REDIRECT_URL = 'account:home'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

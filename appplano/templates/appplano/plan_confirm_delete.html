@@ -1,17 +1,30 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>Detalhes do Plano</title>
 </head>
 <body>
-    <h3>Tem certeza que deseja apagar o Plano '{{ object.nome }}'?</h3>
-    <form action="." method="POST">
-        {% csrf_token %}
-        <button type="submit">Sim, tenho certeza.</button>
-        <button type="reset" onclick="location.href='{% url 'plano:planlist' %}'">Não quero apagar.</button>
-    </form>
+    <div class="wrapper">
+        <p>Ao apagar a linha de atuação todos os desdobramentos associados à ela serão perdidos.</p>
+        <p>A exclusão não poderá ser desfeita.</p>
+        <p>Você tem certeza que deseja apagar a linha de ação "{{ object.nome }}"?</p>
+        <form action="." method="POST">
+            {% csrf_token %}
+            <div class="button-option">
+                <button type="reset" class="btn btn-success" onclick="location.href='{% url 'plano:planlist' %}'">NÃO QUERO APAGAR</button>
+                <button type="submit" class="btn btn-danger">APAGAR</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
