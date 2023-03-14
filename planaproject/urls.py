@@ -7,6 +7,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('account.urls')),
     path('plan/', include('appplano.urls'),),
+    path('task/', include('apptarefa.urls'),),
 ]
 
 if settings.DEBUG:

@@ -455,7 +455,7 @@ button:hover{
 .line-tools i{
     margin-right: 8px;
     color: #f3f3f3;
-    font-size: 16px;
+    font-size: 15px;
     z-index: 0;
 }
 
@@ -543,7 +543,7 @@ button:hover{
 .all-plan-title i{
     margin-right: 8px;
     color: #2f3134;
-    font-size: 18px;
+    font-size: 15px;
 }
 
 /***** DETAIL PAGE *****/
@@ -560,7 +560,22 @@ button:hover{
 }
 
 .line-tools a{
-    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    padding: 2px 10px;
+    width: auto;
+    height: auto;
+    margin-right: 8px;
+    background-color: #1f628a;
+    color: white;
+    border-radius: 3px;
+}
+
+.line-tools a:hover{
+    color: white;
+    background-color: #0e4b70;
+    transition: 0.7s;
+    text-decoration: none;
 }
 
 .content-detail-box{

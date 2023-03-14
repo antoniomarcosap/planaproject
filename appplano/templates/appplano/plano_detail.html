@@ -32,6 +32,7 @@
                 <ul>
                     <li><a href="{% url 'account:dashboard' %}">Dashboard</a></li>
                     <li><a href="{% url 'plano:planlist' %}">Planos de Ações</a></li>
+                    <li><a href="{% url 'task:tasks' %}">Taskss</a></li>
                     <li><a href="#">Mensagem</a></li>
                     <li><a href="#">Configurações</a></li>
                     <li><a href="#">Ajuda</a></li>
@@ -55,8 +56,8 @@
 </header>
 <div class="content-detail-page">
     <div class="line-tools">
-        <a href="{% url 'plano:planlist' %}"><button>Todos os Planos</button></a>
-        <a href="{% url 'plano:adicionarplano' %}"><button>Adicionar Novo Plano</button></a>
+        <a href="{% url 'plano:planlist' %}">Todos os Planos</a>
+        <a href="{% url 'plano:adicionarplano' %}">Adicionar Novo Plano</a>
     </div>
     
     <div class="all-plan-title">

@@ -54,29 +54,21 @@
         </div>
     </div>
 </header>
-<div class="content-listplan">
-    <div class="box-listplan">
-        <div class="line-tools">
-            <a href="{% url 'plano:adicionarplano' %}"><i class="fa fa-table-list"></i>Novo Plano</a>
-        </div>
-        <div class="all-plan-title"><i class="fa fa-list"></i>Resumo dos Planos</div>
-        <div class="box-cardlist">
-            {% if object_list.count != 0 %}
-                {% for plano in object_list %}
-                    <div class="card-plan">
-                        <p class="line-title">{{ plano.nome }}</p>
-                        <p>Responsável: {{ plano.responsavel_plano }}</p>
-                        <p>Unidade: {{ plano.unidade_negocio }}</p>
-                        <p>Indicador: {{ plano.indicador_estrategico }}</p>
-                        <a href="{% url 'plano:plandetail' pk=plano.id %}"><i class="fa fa-square-poll-horizontal"></i>Detalhes</a>
-                    </div>
-                {% endfor %}
-            {% else %}
-                <h5>Você não possui planos cadastrados.</h5>
-            {% endif %}
-        </div>
-    </div>
-</div>
+    {% if object_list.count != 0 %}
+        {% for tarefa in object_list %}
+            <div class="card-plan">
+                <p class="line-title">{{ tarefa.nome }}</p>
+                <p>Responsável: {{ tarefa.responsavel }}</p>
+                <p>Descrição: {{ tarefa.descricao }}</p>
+                <p>Categoria: {{ tarefa.categoria }}</p>
+                <p>Data de Início: {{ tarefa.dt_inicio }}</p>
+                <p>Data de Finalização: {{ tarefa.dt_final }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <h5>Você não possui tarefas cadastrados.</h5>
+    {% endif %}
+
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
